@@ -135,7 +135,4 @@ public class MessageBusImpl implements MessageBus {
 			return qmap.get(m).take(); //blocking queue, waits if queue is empty
 	}
 
-	/*private void restart(){ // to clear everything from messegebus
-		instance= new MessageBusImpl();
-	}*/
 }

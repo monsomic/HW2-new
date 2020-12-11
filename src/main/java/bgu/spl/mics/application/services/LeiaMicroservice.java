@@ -2,10 +2,7 @@ package main.java.bgu.spl.mics.application.services;
 
 import main.java.bgu.spl.mics.Future;
 import main.java.bgu.spl.mics.MicroService;
-import main.java.bgu.spl.mics.application.messages.AttackEvent;
-import main.java.bgu.spl.mics.application.messages.BombDestroyerEvent;
-import main.java.bgu.spl.mics.application.messages.DeactivationEvent;
-import main.java.bgu.spl.mics.application.messages.NoMoreAttacksBroadcast;
+import main.java.bgu.spl.mics.application.messages.*;
 import main.java.bgu.spl.mics.application.passiveObjects.Attack;
 
 /**
@@ -20,6 +17,7 @@ public class LeiaMicroservice extends MicroService {
 	private Attack[] attacks;
 	private Future<Boolean>[] futures;
 	private Future<Boolean> deactivationFuture;
+    private Future<Boolean> bombDestroyerFuture;
 	
     public LeiaMicroservice(Attack[] attacks) {
         super("Leia");
@@ -42,12 +40,15 @@ public class LeiaMicroservice extends MicroService {
         for(int i=0;i<futures.length;i++){
             futures[i].get();
         }
-
-
         deactivationFuture= sendEvent(new DeactivationEvent());
 
-        if(deactivationFuture.get()==true)
-            sendEvent(new BombDestroyerEvent());
+        if(deactivationFuture.get())
+            bombDestroyerFuture = sendEvent(new BombDestroyerEvent());
+
+        if(bombDestroyerFuture.get())
+            sendBroadcast(new DestroyPlanetBroadcast());
+
+        terminate();
     }
 
     protected void writeDiaryTerminate() {

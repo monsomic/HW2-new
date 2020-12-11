@@ -71,7 +71,7 @@ public class Ewoks {
             }
 
     }
-    public void discharge(List<Integer> serials){ // needs synchronized??
+    public  void discharge(List<Integer> serials){ // needs synchronized??
             Iterator<Integer> it = serials.listIterator();
             int curr = it.next();
             while (it.hasNext()) {
@@ -79,7 +79,9 @@ public class Ewoks {
                 curr = it.next();
             }
             System.out.println("discharged");
+        synchronized(this) {
             notifyAll(); // why doesnt work?
+        }
     }
 
 

@@ -39,7 +39,6 @@ public class HanSoloMicroservice extends MicroService {
                 e.printStackTrace();
             }
             crew.discharge(serials);
-            //crew.notifyAll();
             complete(a, true);
             diary.setTotalAttacks();
         });

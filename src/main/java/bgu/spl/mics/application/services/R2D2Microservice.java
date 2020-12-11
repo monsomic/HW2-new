@@ -36,6 +36,7 @@ public class R2D2Microservice extends MicroService {
                 e.printStackTrace();
             }
             complete(d,true);
+            System.out.println("R2D2");
             diary.setR2D2Deactivate(System.currentTimeMillis());
         });
         subscribeBroadcast(DestroyPlanetBroadcast.class, (DestroyPlanetBroadcast d) -> {
