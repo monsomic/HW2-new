@@ -30,24 +30,14 @@ public class C3POMicroservice extends MicroService {
         subscribeEvent(AttackEvent.class, (AttackEvent a) -> {
             List<Integer> serials = a.getSerials();
             int duration = a.getDuration();
-            boolean succeed = false;
-            while (!succeed) {
-                if (crew.recruit(serials) == true)
-                    succeed = true;
-                else {
-                    try {
-                        this.wait();
-                    } catch (InterruptedException e) {
-                    }
-                    ;
-                }
-            }
+           crew.recruit(serials);
             try {
                 Thread.sleep(duration);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             crew.discharge(serials);
+            //crew.notifyAll();
             complete(a, true);
             diary.setTotalAttacks();
         });

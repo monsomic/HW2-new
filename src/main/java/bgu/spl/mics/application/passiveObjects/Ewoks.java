@@ -15,12 +15,14 @@ import java.util.List;
 public class Ewoks {
     private Ewok[] ewokList;
     private static Ewoks instance =null;
+    private Object lock;
 
     private Ewoks(int num){
         ewokList= new Ewok[num+1];
         for(int i=1;i<=num;i++){
             ewokList[i]=new Ewok(i);
         }
+        lock = new Object();
     }
 
     public synchronized static Ewoks getInstance(int num) {  //find a way to initializr without num
@@ -33,35 +35,51 @@ public class Ewoks {
         return instance;
     }
 
-    public synchronized boolean recruit(List<Integer> serials){ // returns false if cant acquire all
-        boolean stop= false;
-        Iterator<Integer> it=serials.listIterator();
-        int curr= it.next();
-        while(!stop && it.hasNext()){
-            if(instance.ewokList[curr].available==false)
-                stop=true;
-            curr=it.next();
-        }
-        if(stop)
-            return false;
-        else {
-            Iterator<Integer> it2=serials.listIterator();
-            curr=it2.next();
+    public synchronized void recruit(List<Integer> serials){ // this is a blocking method
+
+            boolean ok = false;
+            while (!ok) {
+                boolean stop = false;
+                Iterator<Integer> it = serials.listIterator();
+                int curr = 0;
+                while (!stop && it.hasNext()) {
+                    curr = it.next();
+                    if (!ewokList[curr].available)
+                        stop = true;
+                }
+                if (!stop) {
+                    ok = true;
+                    System.out.println("ok= true");
+                }
+                if (!ok) {
+                    System.out.println("ok= false");
+                    try {
+                        System.out.println("waiting");
+                        this.wait();
+                        System.out.println("woke up");
+                    } catch (InterruptedException e) {
+                        System.out.println("intrupted and is good");
+                    }
+                    ;
+                }
+            }
+            Iterator<Integer> it2 = serials.listIterator();
+            int curr = it2.next();
             while (it2.hasNext()) {
                 instance.ewokList[curr].acquire();
-                curr=it.next();
+                curr = it2.next();
             }
-            return true;
-        }
+
     }
     public void discharge(List<Integer> serials){ // needs synchronized??
-        Iterator<Integer> it=serials.listIterator();
-        int curr= it.next();
-        while(it.hasNext()){
-            instance.ewokList[curr].release();
-            curr= it.next();
-        }
-       notifyAll(); // why doesnt work?
+            Iterator<Integer> it = serials.listIterator();
+            int curr = it.next();
+            while (it.hasNext()) {
+                instance.ewokList[curr].release();
+                curr = it.next();
+            }
+            System.out.println("discharged");
+            notifyAll(); // why doesnt work?
     }
 
 

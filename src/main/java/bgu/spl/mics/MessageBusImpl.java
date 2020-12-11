@@ -31,6 +31,8 @@ public class MessageBusImpl implements MessageBus {
 		qmap= new ConcurrentHashMap<MicroService, LinkedBlockingQueue<Message>>();
 		messageTypeMap = new ConcurrentHashMap<Class<? extends Message>,ConcurrentLinkedQueue<MicroService>>();
 		futureMap = new ConcurrentHashMap<Event,Future>();
+		lockUnregisterSendEvent = new Object();
+		lockUnregisterSendBroadcast = new Object();
 	}
 
 	public static MessageBusImpl getInstance() { // not sure if needed synchronized
