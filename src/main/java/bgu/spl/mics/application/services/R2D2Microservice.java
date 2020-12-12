@@ -40,6 +40,7 @@ public class R2D2Microservice extends MicroService {
             diary.setR2D2Deactivate(System.currentTimeMillis());
         });
         subscribeBroadcast(DestroyPlanetBroadcast.class, (DestroyPlanetBroadcast d) -> {
+            writeDiaryTerminate();
             terminate();
         });
     }

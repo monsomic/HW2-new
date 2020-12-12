@@ -44,7 +44,7 @@ public class Ewoks {
                 int curr = 0;
                 while (!stop && it.hasNext()) {
                     curr = it.next();
-                    if (!ewokList[curr].available)
+                    if (!ewokList[curr].isAvailable())
                         stop = true;
                 }
                 if (!stop) {
@@ -80,7 +80,7 @@ public class Ewoks {
             }
             System.out.println("discharged");
         synchronized(this) {
-            notifyAll(); // why doesnt work?
+            notifyAll();
         }
     }
 

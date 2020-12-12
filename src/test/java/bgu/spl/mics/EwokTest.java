@@ -16,8 +16,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 
 class EwokTest {
-
-  /*  private Ewok e;
+    private Ewok e;
     private Future future;
 
     @BeforeEach
@@ -31,14 +30,14 @@ class EwokTest {
     @org.junit.jupiter.api.Test
     void acquire() {
         e.acquire();
-        assertTrue(!e.available);
+        assertTrue(!e.isAvailable());
     }
 
     @org.junit.jupiter.api.Test
     void release() {
         e.release();
-        assertTrue(e.available);
+        assertTrue(e.isAvailable());
     }
-     */
+
 }
 

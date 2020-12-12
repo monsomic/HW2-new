@@ -31,7 +31,6 @@ public class Diary {
     }
     public static Diary  getInstance(){
         return DiaryHolder.instance;
-
     }
 
 
@@ -112,6 +111,10 @@ public class Diary {
         return LandoTerminate;
     }
 
+    public void resetNumberAttacks() {
+        Integer curr= new Integer(String.valueOf(this.totalAttacks)) ;
+        totalAttacks.compareAndSet(curr, 0);
+    }
 
 
 }
