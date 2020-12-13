@@ -42,11 +42,12 @@ public class C3POMicroservice extends MicroService {
         });
 
         subscribeBroadcast(DestroyPlanetBroadcast.class, (DestroyPlanetBroadcast d) -> {
+            writeDiaryTerminate();
             terminate();
         });
 
         subscribeBroadcast(NoMoreAttacksBroadcast.class, (NoMoreAttacksBroadcast n) -> {
-            diary.setHanSoloFinish(System.currentTimeMillis());
+            diary.setC3POFinish(System.currentTimeMillis());
         });
 
     }

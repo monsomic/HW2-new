@@ -28,7 +28,7 @@ public class Main {
 		//read input
 			Gson gson = new Gson();
 			try {
-				Reader reader = new FileReader("input.json");
+				Reader reader = new FileReader(args[0]);
 				System.out.println("habaita");
 				Input json = gson.fromJson(reader, Input.class);
 				Diary diary = Diary.getInstance();

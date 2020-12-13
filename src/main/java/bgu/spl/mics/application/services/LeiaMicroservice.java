@@ -47,7 +47,7 @@ public class LeiaMicroservice extends MicroService {
 
         if(bombDestroyerFuture.get())
             sendBroadcast(new DestroyPlanetBroadcast());
-
+        writeDiaryTerminate();
         terminate();
     }
 

@@ -7,8 +7,8 @@ package main.java.bgu.spl.mics.application.passiveObjects;
  * You may add fields and methods to this class as you see fit (including public methods).
  */
 public class Ewok {
-    int serialNumber;
-    boolean available;
+    private int serialNumber;
+    private boolean available;
 
     public Ewok(int num) {
         serialNumber=num;
@@ -30,5 +30,9 @@ public class Ewok {
      */
     public void release() {
     	available=true;
+    }
+
+    public boolean isAvailable(){
+        return available;
     }
 }

@@ -44,6 +44,7 @@ public class HanSoloMicroservice extends MicroService {
         });
 
         subscribeBroadcast(DestroyPlanetBroadcast.class, (DestroyPlanetBroadcast d) -> {
+            writeDiaryTerminate();
             terminate();
         });
 

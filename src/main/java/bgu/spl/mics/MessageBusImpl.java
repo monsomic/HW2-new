@@ -23,7 +23,8 @@ public class MessageBusImpl implements MessageBus {
 
 	private ConcurrentHashMap<Event,Future> futureMap; // hashmap (some Event (event<T>),its future (future<T>)
 
-	private Object  lockUnregisterSendEvent, lockUnregisterSendBroadcast;
+	private final Object  lockUnregisterSendEvent;
+	private final Object lockUnregisterSendBroadcast;
 
 
 
@@ -65,7 +66,12 @@ public class MessageBusImpl implements MessageBus {
 	@Override @SuppressWarnings("unchecked")
 	public <T> void complete(Event<T> e, T result) {
 		Future f = futureMap.get(e);
-		f.resolve(result);
+		if(f!=null) {
+			f.resolve(result);
+			futureMap.remove(e);
+		}
+		else
+			System.out.println("no such event");
 	}
 
 	@Override
@@ -133,6 +139,10 @@ public class MessageBusImpl implements MessageBus {
 	public Message awaitMessage(MicroService m) throws InterruptedException {
 
 			return qmap.get(m).take(); //blocking queue, waits if queue is empty
+	}
+
+	public static void restartBus() {
+		MessageBusImplHolder.instance = new MessageBusImpl();
 	}
 
 }
