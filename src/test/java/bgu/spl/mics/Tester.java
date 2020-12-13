@@ -1,13 +1,13 @@
-package test.java.bgu.spl.mics;
+package bgu.spl.mics;
 
-import main.java.bgu.spl.mics.*;
-import main.java.bgu.spl.mics.application.Main;
-import main.java.bgu.spl.mics.application.passiveObjects.Attack;
-import main.java.bgu.spl.mics.application.passiveObjects.Diary;
-import main.java.bgu.spl.mics.application.services.C3POMicroservice;
-import main.java.bgu.spl.mics.application.services.HanSoloMicroservice;
+import bgu.spl.mics.application.Main;
+import bgu.spl.mics.application.passiveObjects.Attack;
+import bgu.spl.mics.application.passiveObjects.Diary;
+import bgu.spl.mics.application.services.C3POMicroservice;
+import bgu.spl.mics.application.services.HanSoloMicroservice;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;

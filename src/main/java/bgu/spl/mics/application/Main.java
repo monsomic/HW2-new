@@ -1,12 +1,12 @@
-package main.java.bgu.spl.mics.application;
+package bgu.spl.mics.application;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import main.java.bgu.spl.mics.MicroService;
-import main.java.bgu.spl.mics.application.passiveObjects.Diary;
-import main.java.bgu.spl.mics.application.passiveObjects.Ewoks;
-import main.java.bgu.spl.mics.application.passiveObjects.Input;
-import main.java.bgu.spl.mics.application.services.*;
+import bgu.spl.mics.MicroService;
+import bgu.spl.mics.application.passiveObjects.Diary;
+import bgu.spl.mics.application.passiveObjects.Ewoks;
+import bgu.spl.mics.application.passiveObjects.Input;
+import bgu.spl.mics.application.services.*;
 
 import java.io.FileReader;
 import java.io.FileWriter;

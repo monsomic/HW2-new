@@ -1,7 +1,7 @@
-package main.java.bgu.spl.mics;
+package bgu.spl.mics;
 
-import main.java.bgu.spl.mics.application.Main;
-import main.java.bgu.spl.mics.application.passiveObjects.Diary;
+import bgu.spl.mics.application.Main;
+import bgu.spl.mics.application.passiveObjects.Diary;
 
 import java.util.concurrent.ConcurrentHashMap;
 

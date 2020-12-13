@@ -1,6 +1,6 @@
-package test.java.bgu.spl.mics;
+package bgu.spl.mics;
 
-import main.java.bgu.spl.mics.application.passiveObjects.Attack;
+import bgu.spl.mics.application.passiveObjects.Attack;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

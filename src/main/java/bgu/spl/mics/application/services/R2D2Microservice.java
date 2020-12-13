@@ -1,11 +1,11 @@
-package main.java.bgu.spl.mics.application.services;
+package bgu.spl.mics.application.services;
 
-import main.java.bgu.spl.mics.application.messages.AttackEvent;
-import main.java.bgu.spl.mics.application.messages.BombDestroyerEvent;
-import main.java.bgu.spl.mics.application.messages.DeactivationEvent;
-import main.java.bgu.spl.mics.application.messages.DestroyPlanetBroadcast;
-import main.java.bgu.spl.mics.application.passiveObjects.Ewoks;
-import main.java.bgu.spl.mics.MicroService;
+import bgu.spl.mics.application.messages.AttackEvent;
+import bgu.spl.mics.application.messages.BombDestroyerEvent;
+import bgu.spl.mics.application.messages.DeactivationEvent;
+import bgu.spl.mics.application.messages.DestroyPlanetBroadcast;
+import bgu.spl.mics.application.passiveObjects.Ewoks;
+import bgu.spl.mics.MicroService;
 
 
 import java.util.List;

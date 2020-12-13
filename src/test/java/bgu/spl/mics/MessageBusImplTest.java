@@ -1,12 +1,8 @@
-package test.java.bgu.spl.mics;
+package bgu.spl.mics;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import main.java.bgu.spl.mics.*;
-import main.java.bgu.spl.mics.MicroService;
-import main.java.bgu.spl.mics.MessageBusImpl;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class anaAref implements Event<Boolean> {
     private boolean b;
