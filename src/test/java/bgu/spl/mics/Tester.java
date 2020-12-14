@@ -129,11 +129,11 @@ public class Tester {
                 //I have decide to remove this test since CPU switches are funny and they cause unexpected behaviour.
                 //  System.out.println("Your Deactivation Shield Finished Time --> " + shieldDeactivationTestValue + "  Test Value Should Of Been -> " + currentTests[i].getR2D2Sleep());
                 //  if (Math.round(shieldDeactivationTestValue / 100) * 100 == (Math.round(currentTests[i].getR2D2Sleep()) / 100) * 100)
-                //      passedFirstTest = true; 
-                
+                //      passedFirstTest = true;
+
                 boolean passedSecondTest = false; //Checking Num Of Attacks Logic
                 boolean passedThirdTest = true;  //Checking Graceful Termination (Should be at the same mili second~)
-          
+
                 if (numOfAttacksInTest.get() == (currentTests[i].getNumberOfAttacks().get()))
                     passedSecondTest = true;
 
@@ -159,13 +159,16 @@ public class Tester {
                 }
                 System.out.println("\r\n");
                 diaryInstance.resetNumberAttacks();
-            }
-            System.out.println("\r\n-----------------");
-            System.out.println("Success->" + passedTests);
-            System.out.println("Failed->" + failedTests);
+
+                }
+                System.out.println("\r\n-----------------");
+                System.out.println("Success->" + passedTests);
+                System.out.println("Failed->" + failedTests);
+
         } catch (Exception runTestException) {
             runTestException.printStackTrace();
         }
+
     }
 
 

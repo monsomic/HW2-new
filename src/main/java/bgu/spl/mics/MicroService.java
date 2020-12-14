@@ -170,12 +170,11 @@ public abstract class MicroService implements Runnable {
     	        mess = bus.awaitMessage(this);
                 callMap.get(mess.getClass()).call(mess);
     	    }
-    	    catch (InterruptedException e){System.out.println("walla");};
+    	    catch (InterruptedException e){System.out.println("shut down ungracefully");};
                 }
 
     	bus.unregister(this);
     	writeDiaryTerminate(); // check if it is the right place for this function
-    	System.out.println("SuperGracefully shutdown");
     }
 
     protected abstract void writeDiaryTerminate();

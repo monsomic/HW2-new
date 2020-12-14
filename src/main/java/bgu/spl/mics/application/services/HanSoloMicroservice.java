@@ -1,13 +1,11 @@
 package bgu.spl.mics.application.services;
-import java.util.List;
+import bgu.spl.mics.MicroService;
 import bgu.spl.mics.application.messages.AttackEvent;
 import bgu.spl.mics.application.messages.DestroyPlanetBroadcast;
 import bgu.spl.mics.application.messages.NoMoreAttacksBroadcast;
 import bgu.spl.mics.application.passiveObjects.Ewoks;
-import bgu.spl.mics.MicroService;
 
-
-import javax.security.auth.callback.Callback;
+import java.util.List;
 
 /**
  * HanSoloMicroservices is in charge of the handling {@link AttackEvents}.

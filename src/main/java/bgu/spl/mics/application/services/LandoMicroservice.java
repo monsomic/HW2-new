@@ -25,7 +25,6 @@ public class LandoMicroservice  extends MicroService {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("Lando, lando lando");
             complete(b,true);
 
         });

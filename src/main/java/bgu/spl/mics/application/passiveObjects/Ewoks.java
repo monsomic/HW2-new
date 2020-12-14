@@ -31,6 +31,10 @@ public class Ewoks {
         return instance;
     }
 
+    public void reset(){
+        instance=null;
+    }
+
     public synchronized static Ewoks getInstance() {
         return instance;
     }
@@ -49,16 +53,12 @@ public class Ewoks {
                 }
                 if (!stop) {
                     ok = true;
-                    System.out.println("ok= true");
                 }
                 if (!ok) {
-                    System.out.println("ok= false");
                     try {
-                        System.out.println("waiting");
                         this.wait();
-                        System.out.println("woke up");
                     } catch (InterruptedException e) {
-                        System.out.println("intrupted and is good");
+                        System.out.println("intrupted and is bad");
                     }
                     ;
                 }
@@ -78,7 +78,6 @@ public class Ewoks {
                 instance.ewokList[curr].release();
                 curr = it.next();
             }
-            System.out.println("discharged");
         synchronized(this) {
             notifyAll();
         }
