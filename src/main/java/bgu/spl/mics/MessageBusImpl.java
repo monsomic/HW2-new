@@ -1,7 +1,5 @@
-package main.java.bgu.spl.mics;
+package bgu.spl.mics;
 
-import java.awt.*;
-import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -25,6 +23,7 @@ public class MessageBusImpl implements MessageBus {
 
 	private final Object  lockUnregisterSendEvent;
 	private final Object lockUnregisterSendBroadcast;
+	private final Object lockCompleteSendEvent;
 
 
 
@@ -34,6 +33,7 @@ public class MessageBusImpl implements MessageBus {
 		futureMap = new ConcurrentHashMap<Event,Future>();
 		lockUnregisterSendEvent = new Object();
 		lockUnregisterSendBroadcast = new Object();
+		lockCompleteSendEvent = new Object();
 	}
 
 	public static MessageBusImpl getInstance() { // not sure if needed synchronized
@@ -65,13 +65,14 @@ public class MessageBusImpl implements MessageBus {
     }
 	@Override @SuppressWarnings("unchecked")
 	public <T> void complete(Event<T> e, T result) {
-		Future f = futureMap.get(e);
-		if(f!=null) {
-			f.resolve(result);
-			futureMap.remove(e);
+		synchronized (lockCompleteSendEvent) {
+			Future f = futureMap.get(e);
+			if (f != null) {
+				f.resolve(result);
+				futureMap.remove(e);
+			} else
+				System.out.println("no such event");
 		}
-		else
-			System.out.println("no such event");
 	}
 
 	@Override
@@ -92,20 +93,22 @@ public class MessageBusImpl implements MessageBus {
 	public  <T> Future<T>  sendEvent(Event<T> e) { //enque to the right queue (round robin) , create future object , put in futuremap
 		// sync - because : we can pass first if and then try poll from an empty Q because unregister by another thread :::::BUT - in our implementation this cant happen. sync or  not ?
 		//		  because : if two MS send the same type of event and there is one MS in that Q(in messageTtpeMap) :::BUT - cant happen in our system
+		synchronized (lockCompleteSendEvent) {
 
-		synchronized (lockUnregisterSendEvent) {
-			ConcurrentLinkedQueue<MicroService> Q = messageTypeMap.get(e.getClass());
-			if (Q == null || Q.isEmpty())
-				return null;
+			synchronized (lockUnregisterSendEvent) {
+				ConcurrentLinkedQueue<MicroService> Q = messageTypeMap.get(e.getClass());
+				if (Q == null || Q.isEmpty())
+					return null;
 
-			MicroService firstM = Q.poll();
-			qmap.get(firstM).add(e);
-			messageTypeMap.get(e.getClass()).add(firstM); // for round robin
+				MicroService firstM = Q.poll();
+				qmap.get(firstM).add(e);
+				messageTypeMap.get(e.getClass()).add(firstM); // for round robin
 
-			Future<T> f = new Future<>();
-			futureMap.put(e, f);
-			//notifyAll(); //no need becouse blockingQueue notifies alone.
-			return f;
+				Future<T> f = new Future<>();
+				futureMap.put(e, f);
+				//notifyAll(); //no need because blockingQueue notifies alone.
+				return f;
+			}
 		}
 	}
 

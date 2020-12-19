@@ -1,12 +1,12 @@
-package main.java.bgu.spl.mics.application;
+package bgu.spl.mics.application;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import main.java.bgu.spl.mics.MicroService;
-import main.java.bgu.spl.mics.application.passiveObjects.Diary;
-import main.java.bgu.spl.mics.application.passiveObjects.Ewoks;
-import main.java.bgu.spl.mics.application.passiveObjects.Input;
-import main.java.bgu.spl.mics.application.services.*;
+import bgu.spl.mics.MicroService;
+import bgu.spl.mics.application.passiveObjects.Diary;
+import bgu.spl.mics.application.passiveObjects.Ewoks;
+import bgu.spl.mics.application.passiveObjects.Input;
+import bgu.spl.mics.application.services.*;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -29,19 +29,17 @@ public class Main {
 			Gson gson = new Gson();
 			try {
 				Reader reader = new FileReader(args[0]);
-				System.out.println("habaita");
 				Input json = gson.fromJson(reader, Input.class);
 				Diary diary = Diary.getInstance();
 				battle(json);
 				output(diary, args[1]);
 			} catch (Exception e) {
-				System.out.println("problem accured");
+				System.out.println("problem");
 			}
 		}
 
 			public static void battle(Input json ){
 				Ewoks ewoks = Ewoks.getInstance(json.getEwoks());
-
 				MicroService HanSolo = new HanSoloMicroservice();
 				MicroService C3PO = new C3POMicroservice();
 				MicroService R2D2 = new R2D2Microservice(json.getR2D2());
@@ -70,7 +68,9 @@ public class Main {
 					t3.join();
 					t4.join();
 					t5.join();
-				}catch(Exception e) {System.out.println("problemo");}		// In order to get a right answer at outputConfig.
+				}catch(Exception e) {System.out.println("problemo");}// In order to get a right answer at outputConfig.
+
+				ewoks.reset();
 			}
 
 

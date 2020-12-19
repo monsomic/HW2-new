@@ -1,6 +1,6 @@
-package main.java.bgu.spl.mics.application.messages;
-import main.java.bgu.spl.mics.application.passiveObjects.Attack;
-import main.java.bgu.spl.mics.Event;
+package bgu.spl.mics.application.messages;
+import bgu.spl.mics.application.passiveObjects.Attack;
+import bgu.spl.mics.Event;
 
 
 import java.util.List;

@@ -1,7 +1,7 @@
-package main.java.bgu.spl.mics;
+package bgu.spl.mics;
 
-import main.java.bgu.spl.mics.application.Main;
-import main.java.bgu.spl.mics.application.passiveObjects.Diary;
+import bgu.spl.mics.application.Main;
+import bgu.spl.mics.application.passiveObjects.Diary;
 
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -170,12 +170,11 @@ public abstract class MicroService implements Runnable {
     	        mess = bus.awaitMessage(this);
                 callMap.get(mess.getClass()).call(mess);
     	    }
-    	    catch (InterruptedException e){System.out.println("walla");};
+    	    catch (InterruptedException e){System.out.println("shut down ungracefully");};
                 }
 
     	bus.unregister(this);
     	writeDiaryTerminate(); // check if it is the right place for this function
-    	System.out.println("SuperGracefully shutdown");
     }
 
     protected abstract void writeDiaryTerminate();

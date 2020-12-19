@@ -1,14 +1,8 @@
-package main.java.bgu.spl.mics.application.services;
+package bgu.spl.mics.application.services;
 
-import main.java.bgu.spl.mics.application.messages.AttackEvent;
-import main.java.bgu.spl.mics.application.messages.BombDestroyerEvent;
-import main.java.bgu.spl.mics.application.messages.DeactivationEvent;
-import main.java.bgu.spl.mics.application.messages.DestroyPlanetBroadcast;
-import main.java.bgu.spl.mics.application.passiveObjects.Ewoks;
-import main.java.bgu.spl.mics.MicroService;
-
-
-import java.util.List;
+import bgu.spl.mics.MicroService;
+import bgu.spl.mics.application.messages.DeactivationEvent;
+import bgu.spl.mics.application.messages.DestroyPlanetBroadcast;
 
 /**
  * R2D2Microservices is in charge of the handling {@link DeactivationEvent}.
@@ -36,7 +30,6 @@ public class R2D2Microservice extends MicroService {
                 e.printStackTrace();
             }
             complete(d,true);
-            System.out.println("R2D2");
             diary.setR2D2Deactivate(System.currentTimeMillis());
         });
         subscribeBroadcast(DestroyPlanetBroadcast.class, (DestroyPlanetBroadcast d) -> {

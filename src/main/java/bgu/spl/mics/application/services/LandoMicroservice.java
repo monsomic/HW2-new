@@ -1,8 +1,8 @@
-package main.java.bgu.spl.mics.application.services;
+package bgu.spl.mics.application.services;
 
-import main.java.bgu.spl.mics.MicroService;
-import main.java.bgu.spl.mics.application.messages.BombDestroyerEvent;
-import main.java.bgu.spl.mics.application.messages.DestroyPlanetBroadcast;
+import bgu.spl.mics.MicroService;
+import bgu.spl.mics.application.messages.BombDestroyerEvent;
+import bgu.spl.mics.application.messages.DestroyPlanetBroadcast;
 
 /**
  * LandoMicroservice
@@ -25,7 +25,6 @@ public class LandoMicroservice  extends MicroService {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("Lando, lando lando");
             complete(b,true);
 
         });
